@@ -1,0 +1,15 @@
+[package]
+edition = "2021"
+name = "fluentci-demo-rust"
+version = "0.1.0"
+
+[dependencies]
+actix-web = "4.9.0"
+dotenv = "0.15.0"
+serde = {version = "1.0.208", features = ["derive"]}
+serde_json = "1.0.125"
+sqlx = {version = "0.8.0", features = ["postgres", "runtime-tokio-rustls", "macros"]}
+tokio = {version = "1.39.3", features = ["full"]}
+
+[dev-dependencies]
+actix-rt = "2.10.0"
