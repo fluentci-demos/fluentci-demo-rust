@@ -19,9 +19,10 @@ jobs:
       - name: Run tests
         run: |
           fluentci run --wasm postgres start
-          cargo install sqlx-cli
-          cargo sqlx prepare
+          curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+          cargo-binstall sqlx-cli -y
           sqlx migrate run
+          cargo sqlx prepare
           cargo test
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -32,3 +33,6 @@ jobs:
       - name: Run build
         run: |
           fluentci run --wasm rust build
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DATABASE_URL: postgres://postgres@localhost/demo
